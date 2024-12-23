@@ -21,6 +21,7 @@ const tourSchema = new Schema<ITour, TTourModel, ITourMethods>({
   coverImage: { type: String, required: true },
   images: [String],
   startDates: [Date],
+  availableSeats: { type: Number, required: true },
   startLocation: { type: String },
   locations: [String],
   slug: String,

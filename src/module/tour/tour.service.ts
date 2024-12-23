@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ITour } from './tour.interface'
 import Tour from './tour.model'
 
@@ -23,7 +24,10 @@ const getSingleTour = async (id: string) => {
 }
 
 const updateTour = async (id: string, payload: Partial<ITour>) => {
-  const result = Tour.findByIdAndUpdate(id, payload)
+  const result = Tour.findByIdAndUpdate(id, payload, {
+    new: true,
+    runValidators: true,
+  })
   return result
 }
 

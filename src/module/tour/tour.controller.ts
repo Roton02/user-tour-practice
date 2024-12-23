@@ -1,33 +1,29 @@
 import { Request, Response } from 'express'
 import { tourService } from './tour.service'
+import { sendResponse } from '../../utils/sendResponse'
+import catchAsync from '../../utils/catchAsync'
 
-const createTour = async (req: Request, res: Response) => {
-  try {
-    const body = req.body
-    const result = await tourService.createTour(body)
+const createTour = catchAsync(async (req: Request, res: Response) => {
+  const body = req.body
+  const result = await tourService.createTour(body)
 
-    res.send({
-      success: true,
-      message: 'Tour created successfully',
-      result,
-    })
-  } catch (error) {
-    res.send({
-      success: false,
-      message: 'Something went wrong',
-      error,
-    })
-  }
-}
+  sendResponse(res, {
+    statusCode: 201,
+    success: true,
+    message: 'Tour created successfully',
+    data: result,
+  })
+})
 
 const getTours = async (req: Request, res: Response) => {
   try {
     const result = await tourService.getTours()
 
-    res.send({
+    sendResponse(res, {
+      statusCode: 200,
       success: true,
       message: 'Tours get successfully',
-      result,
+      data: result,
     })
   } catch (error) {
     res.send({
@@ -43,10 +39,11 @@ const getSingleTour = async (req: Request, res: Response) => {
     const id = req.params.id
     const result = await tourService.getSingleTour(id)
 
-    res.send({
+    sendResponse(res, {
+      statusCode: 200,
       success: true,
-      message: 'Tour get successfully',
-      result,
+      message: 'Tours get successfully',
+      data: result,
     })
   } catch (error) {
     res.send({
@@ -63,10 +60,11 @@ const updateTour = async (req: Request, res: Response) => {
     const body = req.body
     const result = await tourService.updateTour(id, body)
 
-    res.send({
+    sendResponse(res, {
+      statusCode: 201,
       success: true,
-      message: 'Tour updated successfully',
-      result,
+      message: 'Tours update successfully',
+      data: result,
     })
   } catch (error) {
     res.send({
@@ -81,10 +79,11 @@ const deleteTour = async (req: Request, res: Response) => {
     const id = req.params.id
     const result = await tourService.deleteTour(id)
 
-    res.send({
+    sendResponse(res, {
+      statusCode: 200,
       success: true,
-      message: 'Tour deleted successfully',
-      result,
+      message: 'Tours delete successfully',
+      data: result,
     })
   } catch (error) {
     res.send({
@@ -99,10 +98,11 @@ const getNextSchedule = async (req: Request, res: Response) => {
     const id = req.params.id
     const result = await tourService.getNextSchedule(id)
 
-    res.send({
+    sendResponse(res, {
+      statusCode: 201,
       success: true,
-      message: 'Tour deleted successfully',
-      result,
+      message: 'Tours get successfully',
+      data: result,
     })
   } catch (error) {
     res.send({

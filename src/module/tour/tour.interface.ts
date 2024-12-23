@@ -8,6 +8,7 @@ export interface ITour {
   coverImage: string
   images: string[]
   startDates: Date[]
+  availableSeats: number
   startLocation: string
   locations: string[]
   slug: string
